@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {FaSearch} from 'react-icons/fa'
 import './SearchBar.css'
-function SearchBar() {
+function SearchBar({setResults}) {
   const [input, setInput] = useState("")
   const fetchData = (value) => {
     fetch("https://jsonplaceholder.typicode.com/users").then(response => response.json())
@@ -9,7 +9,7 @@ function SearchBar() {
     const results = json.filter((user)=> {
       return value && user && user.name.toLowerCase().includes(value)
     })
-    console.log(results);
+    setResults(results)
   })
 }
   
