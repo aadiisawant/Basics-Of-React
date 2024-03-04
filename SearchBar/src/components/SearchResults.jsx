@@ -1,11 +1,12 @@
 import React from 'react'
 import './SearchResults.css'
+import FetchedResult from './FetchedResult'
 function SearchResults({results}) {
   return (
     <div className='results-list'>
       {
         results.map((result, id)=>{
-            return <div key={id}>{result.name}</div>
+            return <FetchedResult  result={result} key={id} />
         })
       }
     </div>
