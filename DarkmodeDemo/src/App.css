@@ -1,0 +1,39 @@
+body {
+    transition: background-color 0.3s ease;
+  }
+  
+  .dark-theme {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .theme-buttons {
+    display: flex;
+    margin-top: 20px;
+    background-color: #131516;
+    border-radius: 10px;
+  }
+  
+  .theme-buttons button {
+    /* margin-right: 10px; */
+    padding: 10px 20px;
+    background-color: #131516;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+  }
+  
+  .theme-buttons button.active {
+    background-color: grey;
+  }
+  
