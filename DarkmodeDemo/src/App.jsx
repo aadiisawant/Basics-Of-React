@@ -26,7 +26,6 @@ const App = () => {
         <button onClick={setLightTheme}
         className={!isDarkTheme ? 'active' : ''}>Light</button>
       </div>
-      {/* Your application content goes here */}
     </div>
   );
 };
