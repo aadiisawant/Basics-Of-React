@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 
 function App() {
@@ -15,11 +15,13 @@ function App() {
     for(let i=1;i<=length;i++){
       let char =Math.floor(Math.random()*str.length+1)
       pass += str.charAt(char)
-      
-      console.log(pass);
     }
     setPassword(pass)
   },[length,numAllowed,charAllowed,setPassword])
+
+  useEffect(()=>{
+    passwordGenerator()
+  },[length, numAllowed, charAllowed, passwordGenerator])
 
   return (
     <>
@@ -44,6 +46,24 @@ function App() {
             className='cursor-pointer' 
             onChange={(e)=> setLength(e.target.value)}/>
             <label>Length: {length}</label>
+          </div>
+          <div className='flex  items-center gap-x-1'>
+            <input type="checkbox"
+            defaultChecked={numAllowed}
+            id='numberInput'
+            onChange={()=>{
+              setNumAllowed((prev) => !prev)
+            }} />
+            <label>Numbers</label>
+          </div>
+          <div className='flex  items-center gap-x-1'>
+            <input type="checkbox"
+            defaultChecked={charAllowed}
+            id='numberInput'
+            onChange={()=>{
+              setCharAllowed((prev) => !prev)
+            }} />
+            <label>Characters</label>
           </div>
         </div>
       </div>
