@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 
 function App() {
@@ -7,6 +7,10 @@ function App() {
   const [charAllowed, setCharAllowed] = useState(false)
   const [password, setPassword] = useState("")
 
+  //useRef
+  const passwordRef = useRef(null)
+
+  //useCallback : it will memorise the function as much as possible
   const passwordGenerator = useCallback(()=>{
     let pass = ""
     let str = "ASDFGHJKLZXCVBNMQWERTYUIOPqazxswedcvfrtgbnhyujmkiopl"
@@ -19,14 +23,25 @@ function App() {
     setPassword(pass)
   },[length,numAllowed,charAllowed,setPassword])
 
+  //in above dependency array, we are using setpassword but not password, bcoz if we use password it just goes on optimizing and the loop never stops.
+
+  const copyPassToClipboard = useCallback(()=>{
+
+    passwordRef.current?.select() //it shows that password got selected
+    //we can select the size to copy by selection range
+    passwordRef.current?.setSelectionRange(0,9)
+    window.navigator.clipboard.writeText(password)
+  },[password])
+
   useEffect(()=>{
     passwordGenerator()
   },[length, numAllowed, charAllowed, passwordGenerator])
+  //whenever there is a change in dependency array for any value in useeffect, it will render again.
 
   return (
     <>
 
-      <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-4 my-8 text-orange-500 bg-gray-700'>
+      <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-4 my-8 text-orange-500 bg-gray-800'>
       <h1 className='text-center text-white my-3'>Password Generator</h1>
         <div className='flex shadow rounded-lg overflow-hidden mb-4'><input 
         type="text"
@@ -34,8 +49,11 @@ function App() {
         className='outline-none w-full py-1 px-3'
         placeholder='Password' 
         readOnly
+        ref={passwordRef}
         />
-        <button className='bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded outline-none'>Copy</button>
+        <button className='bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded outline-none'
+        onClick={copyPassToClipboard}
+        >Copy</button>
         </div>
         <div className='flex text-sm gap-x-2'>
           <div className='flex  items-center gap-x-1'>
@@ -64,6 +82,9 @@ function App() {
               setCharAllowed((prev) => !prev)
             }} />
             <label>Characters</label>
+          </div>
+          <div className='flex  items-center gap-x-1'>
+          <input type="date" />
           </div>
         </div>
       </div>
