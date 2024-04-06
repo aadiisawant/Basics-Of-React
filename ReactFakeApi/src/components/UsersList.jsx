@@ -1,20 +1,27 @@
-import { Axios } from "axios";
+// import { Axios } from "axios";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { json } from "react-router-dom";
+// import axios from "axios";
 function UsersList() {
   const [data, setData] = useState([]);
   const [isError, setIsError] = useState("");
-  
+  const url = 'https://reqres.in/api/users/2';
   useEffect(() => {
-    axios
-    .get("https://jsonplaceholder.typicode.com/posts")
-    .then((response) => setData(response.data))
-    .catch((error) => setIsError(error.message))
-    console.log("In User");
+    
+    const fetchData = async ()=>{
+      const result = await fetch(url)
+      result.json().then(res =>{
+        setData(res)
+        console.log(res);
+      })
+
+    }
+    fetchData();
   },[])
   return (
   <>
-    <h1>{data}</h1>
+    <h1 key={data.data.id}>Name : {data.data.first_name} {data.data.last_name}</h1>
+    <h5>Email : {data.data.email}</h5>
   </>
   )
 }
