@@ -23,7 +23,10 @@ function UsersList() {
     {/* <h1 key={data.data.id}>Name : {data.data.first_name} {data.data.last_name}</h1>
     <h5>Email : {data.data.email}</h5> */}
     {data.map( (res)=>{
-      return  <li key={res.id}>{res.email}</li>
+      return  <><li key={res.id}>{res.email}
+      <ul key={res.id}>{res.first_name}</ul></li>
+      
+      </>
     })}
   </>
   )
