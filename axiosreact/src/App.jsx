@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import PostsData from './components/PostsData'
 import Layout from './components/Layout'
 import CommentsData from './components/CommentsData'
+import GitHub, { GithubInfo } from './components/GitHub'
 const router = createBrowserRouter([
   {
     path : '/',
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
       {
         path : 'comments',
         element: <CommentsData />
+      },
+      {
+        loader: GithubInfo,
+        path : 'github',
+        element: <GitHub />
       }
     ]
   }

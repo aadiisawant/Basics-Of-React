@@ -12,7 +12,9 @@ function Header() {
             <li>
                 <Link to="/comments">Comments</Link>
             </li>
-            
+            <li>
+                <Link to="/github">Github</Link>
+            </li>
         </ul>
       </nav>
     </>
